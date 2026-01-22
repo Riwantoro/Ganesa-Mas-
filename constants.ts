@@ -6,7 +6,7 @@ export const COMPANY_INFO = {
   phone: "+62 812-3456-7890",
   email: "info@ganesamas.com",
   waLink: "https://wa.me/6281234567890",
-  logo: "./assets/logo.png", // Path untuk logo perusahaan
+  logo: "./assets/logo.png", 
 };
 
 export const ASSETS = {
