@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import Catalog from './components/Catalog';
 import Footer from './components/Footer';
 import { Star } from 'lucide-react';
+import { ASSETS, COMPANY_INFO } from './constants';
 
 const App: React.FC = () => {
   return (
@@ -40,9 +41,12 @@ const App: React.FC = () => {
             <div className="relative">
               <div className="absolute -top-10 -left-10 w-40 h-40 bg-luxury-gold/10 -z-10 rounded-full blur-3xl"></div>
               <img 
-                src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=2073&auto=format&fit=crop" 
-                alt="Tentang Ganesa Mas" 
-                className="rounded-sm shadow-2xl grayscale hover:grayscale-0 transition-all duration-700"
+                src={ASSETS.aboutImg} 
+                alt={`Tentang ${COMPANY_INFO.name}`} 
+                className="rounded-sm shadow-2xl grayscale hover:grayscale-0 transition-all duration-700 w-full"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?q=80&w=2073&auto=format&fit=crop";
+                }}
               />
               <div className="absolute bottom-6 -right-6 bg-white p-6 shadow-xl border-l-4 border-luxury-gold hidden md:block">
                 <div className="flex gap-1 text-luxury-gold mb-2">
@@ -56,7 +60,7 @@ const App: React.FC = () => {
             <div>
               <h2 className="font-serif text-4xl font-bold mb-6">Mitra Terpercaya <span className="text-luxury-gold">Pendidikan</span> Bali</h2>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Ganesa Mas lahir dari semangat untuk memajukan pendidikan di Bali. Sebagai distributor buku terkemuka, kami memastikan setiap sekolah mendapatkan akses mudah ke literatur pendidikan yang berkualitas dan relevan.
+                {COMPANY_INFO.name} lahir dari semangat untuk memajukan pendidikan di Bali. Sebagai distributor buku terkemuka, kami memastikan setiap sekolah mendapatkan akses mudah ke literatur pendidikan yang berkualitas dan relevan.
               </p>
               <ul className="space-y-4 mb-8">
                 <li className="flex items-center gap-3">

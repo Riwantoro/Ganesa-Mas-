@@ -1,11 +1,12 @@
 
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Menu, X } from 'lucide-react';
+import { Menu, X, BookOpen } from 'lucide-react';
 import { COMPANY_INFO } from '../constants';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [logoError, setLogoError] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,10 +26,20 @@ const Header: React.FC = () => {
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md py-3' : 'bg-transparent py-5'}`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <div className="flex items-center gap-2">
-          <div className="bg-luxury-gold p-1.5 rounded-sm">
-             <BookOpen className="text-white w-6 h-6" />
-          </div>
+        <div className="flex items-center gap-3">
+          {/* Logo Container: Tries to load PNG, falls back to Icon if missing */}
+          {!logoError ? (
+            <img 
+              src={COMPANY_INFO.logo} 
+              alt="Logo" 
+              className="h-10 w-auto object-contain"
+              onError={() => setLogoError(true)}
+            />
+          ) : (
+            <div className="bg-luxury-gold p-1.5 rounded-sm">
+               <BookOpen className="text-white w-6 h-6" />
+            </div>
+          )}
           <span className={`font-serif text-2xl font-bold tracking-tight ${isScrolled ? 'text-gray-900' : 'text-gray-900 md:text-white'}`}>
             {COMPANY_INFO.name}
           </span>
@@ -49,7 +60,7 @@ const Header: React.FC = () => {
 
         {/* Mobile Toggle */}
         <button 
-          className="md:hidden text-gray-900" 
+          className={`md:hidden ${isScrolled ? 'text-gray-900' : 'text-gray-900 md:text-white'}`}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? <X /> : <Menu />}

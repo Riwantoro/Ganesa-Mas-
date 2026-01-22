@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { COMPANY_INFO } from '../constants';
+import { COMPANY_INFO, ASSETS } from '../constants';
 import { ChevronRight } from 'lucide-react';
 
 const Hero: React.FC = () => {
@@ -9,9 +9,13 @@ const Hero: React.FC = () => {
       {/* Background with overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?q=80&w=2070&auto=format&fit=crop" 
+          src={ASSETS.heroBg} 
           alt="Library Background" 
           className="w-full h-full object-cover"
+          onError={(e) => {
+            // Fallback to Unsplash if local asset is missing
+            (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?q=80&w=2070&auto=format&fit=crop";
+          }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent"></div>
       </div>
